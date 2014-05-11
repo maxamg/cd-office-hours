@@ -21,7 +21,7 @@ WEEK 1
    python --version
    Python 2.7.6
    ```
-1. Start hte vagrant instanace for the Vagrantfile in this directory:
+1. Start the vagrant instanace for the Vagrantfile in this directory:
 
    ```
    vagrant up

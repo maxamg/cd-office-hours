@@ -12,6 +12,5 @@ setuid {{ app_user_id }}
 respawn
 respawn limit 1 100
 
-env CLASSPATH={{ app_classpath }}
 
-exec java -jar {{ app_jar }} server {{ app_config_filepath }} 2>&1 | tee {{ app_log_path }}
+exec java -jar /apps/{{ app_jar }} server {{ app_config_filepath }} 2>&1 | tee {{ app_log_path }}

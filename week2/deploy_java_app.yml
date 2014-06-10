@@ -27,14 +27,14 @@
       file: name=/apps/logs state=directory
 
     - name: Transfer build package
-      synchronize: src=/Users/maxgriff/clones/dropwizard-helloworld/target/{{ app_jar }} dest=/apps/{{ app_jar }}
+      synchronize: src=artifacts/{{ app_jar }} dest=/apps/{{ app_jar }}
 
     - name: Transfer config file
-      synchronize: src=/Users/maxgriff/clones/dropwizard-helloworld/config/dev_config.yml dest={{ app_config_filepath }}
+      synchronize: src=artifacts/dev_config.yml dest={{ app_config_filepath }}
 
     - name: Create upstart daemon script
       sudo: yes
-      template: src=/Users/maxgriff/maxamg/cd-office-hours/week2/dropwizard_upstart.j2 dest=/etc/init/hello-world.conf owner=root group=root mode=0644
+      template: src=./dropwizard_upstart.j2 dest=/etc/init/hello-world.conf owner=root group=root mode=0644
 
     - name: Start thing
       sudo: yes

@@ -44,4 +44,4 @@
       wait_for: port=8080 timeout=15
 
     - name: hit the app end-point
-      uri: url=http://192.168.33.10:8080/helloworld
+      uri: url=http://localhost:8080/helloworld

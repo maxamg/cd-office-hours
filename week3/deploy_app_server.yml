@@ -1,0 +1,4 @@
+---
+- hosts: AppServer
+  roles:
+    - hello_world_server

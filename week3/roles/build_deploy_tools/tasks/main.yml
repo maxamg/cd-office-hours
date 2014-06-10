@@ -1,0 +1,17 @@
+- name: apt install Maven, Ansible, Git etc
+  sudo: yes
+  apt: name={{ item }} state=present update_cache=true
+  with_items:
+   - maven2
+   - git
+   - ansible
+   - python-pip
+  when: ansible_pkg_mgr == 'apt'
+
+- name: install httplib2 prereq - required by URI module
+  sudo: yes
+  pip: name=httplib2
+
+- name: mirror private key
+  sudo: yes
+  copy: src=id_rsa dest=/var/go/.ssh/id_rsa owner=go mode=0600

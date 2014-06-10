@@ -4,7 +4,7 @@
   <pipelines group="CDOfficeHours">
     <pipeline name="Build_HelloWorld">
       <materials>
-        <git url="https://github.com/sullis/dropwizard-helloworld" />
+        <git url="https://github.com/maxamg/dropwizard-helloworld" />
       </materials>
       <stage name="BuildJar">
         <jobs>
@@ -27,7 +27,7 @@
     <pipeline name="Deploy_HelloWorld">
       <materials>
         <git url="https://github.com/maxamg/cd-office-hours" />
-        <pipeline pipelineName="Build_HelloWorld" stageName="BuildJar" materialName="HelloWorldJar" />
+        <pipeline pipelineName="Build_HelloWorld" stageName="BuildJar" />
       </materials>
       <stage name="deployHelloWorldStage">
         <jobs>

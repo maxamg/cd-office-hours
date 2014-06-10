@@ -4,7 +4,7 @@ WEEK 2
 1. Download a Hello World app project:
 
    ```
-   git clone https://github.com/sullis/dropwizard-helloworld
+   git clone https://github.com/maxamg/dropwizard-helloworld
    ```
 1. Ensure you have maven installed
 
@@ -36,3 +36,8 @@ WEEK 2
 
    See [https://github.com/maxamg/cd-office-hours/blob/master/week2/dropwizard_upstart.j2](https://github.com/maxamg/cd-office-hours/blob/master/week2/dropwizard_upstart.j2)
 
+1. To execute the playbook:
+
+   ```
+   ansible-playbook -vvv -i inventory --user vagrant --private-key=~/.vagrant.d/insecure_private_key deploy_java_app.yml
+   ```

@@ -58,3 +58,9 @@ WEEK 1
     "ping": "pong"
 }
    ```
+
+1. Destroy your vagrant VM to save space (we'll create another one in next weeks session):
+
+   ```
+   vagrant destroy -f
+   ```

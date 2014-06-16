@@ -3,6 +3,7 @@
   sudo: yes
   apt: name={{ item }} state=present update_cache=true
   with_items:
+   - openjdk-7-jre
    - python-pip
   when: ansible_pkg_mgr == 'apt'
 

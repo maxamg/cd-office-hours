@@ -1,6 +1,6 @@
 ---
 - hosts: CDServer
-  tags: server
+#  tags: server
   roles:
     - ansible-gocd
     - build_deploy_tools

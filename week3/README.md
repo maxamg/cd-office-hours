@@ -64,8 +64,7 @@ I've used the recommended role/task layout as documented on the [Ansible site](h
    $ vagrant ssh go-server
    $ sudo -i -u go
    $ cp /tmp/cruise-config.xml /etc/go/
-   $ logout
-   $ sudo service go-server restart
+   $ service go-server restart
    ```
 
 1. Wait 30 seconds or so for the server to come back up and refresh your browser. You should now see 2 pipelines.

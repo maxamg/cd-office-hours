@@ -74,7 +74,7 @@ I've used the recommended role/task layout as documented on the [Ansible site](h
 
 1. When the build has completed, kick off the deployment.
 
-1. Confirm the app has been deployed by hitting [http://192.168.33.30/hello-world](http://192.168.33.30/hello-world)
+1. Confirm the app has been deployed by hitting [http://192.168.33.30:8080/helloworld](http://192.168.33.30:8080/helloworld)
 
 1. Destroy your vagrant VM to save space (we'll create more in next weeks session):
 

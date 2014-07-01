@@ -41,6 +41,8 @@ Adjust as necessary.
    ```
    Navigate to your browser and hit [http://localhost:8080/helloworld](http://localhost:8080/helloworld)
    
+1. Ctrl-C the process to kill the app
+
 1. Create an Ansible play to sync the dropwizard binaries to the vagrant host and start the java process
 
 
@@ -54,8 +56,11 @@ Adjust as necessary.
 1. To execute the playbook:
 
    ```
+   vagrant up
    ansible-playbook -vvv -i inventory --user vagrant --private-key=~/.vagrant.d/insecure_private_key deploy_java_app.yml
    ```
+
+1. Ensure you can hit the endpoint [http://192.168.33.20:8080/helloworld](http://192.168.33.20:8080/helloworld)
 
 1. Destroy your vagrant VM to save space (we'll create more in next weeks session):
 

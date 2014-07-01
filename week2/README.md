@@ -1,6 +1,7 @@
 WEEK 2
 ======
 
+### IMPORTANT:
 Some of the directory paths are relative. The instructions assume
 you have all github repositories cloned in the same parent directory.
 Adjust as necessary.

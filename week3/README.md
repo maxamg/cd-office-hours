@@ -56,7 +56,7 @@ I've used the recommended role/task layout as documented on the [Ansible site](h
    ```
    Note: no ansible has been run on the app-server at this point. We'll aim to deploy this box via Go CD.
    
-1. Go has an XML config backbone, conveniently in one file that describes all pipelines. We need to set up a build and deployment pipeline. An example can be found below the `samlple_go_config` directory. copy it to the go-server:
+1. Go has an XML config backbone, conveniently in one file that describes all pipelines. We need to set up a build and deployment pipeline. An example can be found below the `sample_go_config` directory. copy it to the go-server:
 
    ```
    $ scp -i ~/.vagrant.d/insecure_private_key sample_go_config/cruise-config.xml vagrant@192.168.33.31:/tmp

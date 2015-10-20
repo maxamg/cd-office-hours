@@ -1,0 +1,64 @@
+---
+- hosts: LB
+  vars:
+    servers_to_loadbalance: "{{ groups['AppServer'] }}"
+  sudo: yes
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes cache_valid_time=3600
+    - name: install haproxy
+      apt: name=haproxy state=present
+    - name: overwrite haproxy config
+      template: src=./haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg
+    - name: enable haproxy service in defaults
+      lineinfile: dest=/etc/default/haproxy regexp='^ENABLED=.*$' line='ENABLED=1'
+    - name: restart haproxy
+      service: name=haproxy state=restarted
+
+- hosts: AppServer
+  vars:
+    app_user_id: vagrant
+    app_jar_source: ../../dropwizard-helloworld/target/dropwizard-helloworld-0.0.1-SNAPSHOT.jar
+    app_jar: dropwizard-helloworld-0.0.1-SNAPSHOT.jar
+    app_config_filepath: /apps/dropwizard-helloworld.yml
+    app_log_path: /tmp/app.log
+  tasks:
+
+    - name: install pip - required to install httplib2
+      sudo: yes
+      apt: name=python-pip update_cache=yes
+
+    - name: install that thing called java
+      sudo: yes
+      apt: name=openjdk-7-jre
+
+    - name: install httplib2 prereq - required by URI module
+      sudo: yes
+      pip: name=httplib2
+
+    - name: create target app dir
+      sudo: yes
+      file: path=/apps state=directory owner=vagrant group=vagrant
+
+    - name: create apps/logs
+      file: name=/apps/logs state=directory
+
+    - name: Transfer build package
+      synchronize: src={{ app_jar_source }} dest=/apps/{{ app_jar }}
+
+    - name: Transfer config file
+      synchronize: src=artifacts/dev_config.yml dest={{ app_config_filepath }}
+
+    - name: Create upstart daemon script
+      sudo: yes
+      template: src=./dropwizard_upstart.j2 dest=/etc/init/hello-world.conf owner=root group=root mode=0644
+
+    - name: Start thing
+      sudo: yes
+      service: name=hello-world state=restarted
+
+    - name: wait up to 15 seconds for port 8080 to become available
+      wait_for: port=8080 timeout=15
+
+    - name: hit the app end-point
+      uri: url=http://localhost:8080/helloworld

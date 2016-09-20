@@ -28,12 +28,18 @@ WEEK 1
    ```
     This will create a new VM with Ubuntu 12.04 (precise pangolin)
 
+	If your default VM provider is set to something other than Virtualbox, you will need to explicitly specify the VM provider.
+
+	```
+	vagrant up --provider virtualbox
+	```
+
 1. Test SSH both ways
     1. ```vagrant ssh``` # then Ctrl-d to logout
     1. ```ssh vagrant@192.168.33.10``` # password is ```vagrant``` then logout
-    
+
     This proves that we have set up a static IP address which Anisble will later require.
-    
+
 1. Test Ansible ping
 
    ```
@@ -51,7 +57,7 @@ WEEK 1
    --private-key=~/.vagrant.d/insecure_private_key # use the vagrant SSH keys already created as part of vagrant up
    ```
    Response should end with:
-   
+
    ```
    192.168.33.10 | success >> {
     "changed": false,

@@ -1,0 +1,25 @@
+- name: apt install Maven, Ansible, Git etc
+  sudo: yes
+  apt: name={{ item }} state=present update_cache=true
+  with_items:
+   - maven
+   - git
+   - ansible
+   - python-pip
+  when: ansible_pkg_mgr == 'apt'
+
+- name: install httplib2 prereq - required by URI module
+  sudo: yes
+  pip: name=httplib2
+
+- name: create SSH directory for go user
+  sudo: yes
+  file: path=/var/go/.ssh owner=go mode=0500 state=directory
+
+- name: mirror private key
+  sudo: yes
+  copy: src=id_rsa dest=/var/go/.ssh/id_rsa owner=go mode=0600
+
+- name: Update ansible.cfg for SSH password-less deployment
+  sudo: yes
+  lineinfile: dest=/etc/ansible/ansible.cfg state=present line="ssh_args = -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no" insertafter="\[ssh_connection\]"

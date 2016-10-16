@@ -1,0 +1,6 @@
+[AppServer]
+192.168.33.40 name=app0
+192.168.33.41 name=app1
+
+[LB]
+192.168.33.42 name=lb

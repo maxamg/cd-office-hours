@@ -1,0 +1,16 @@
+# Ubuntu upstart file
+# IF YOU CHANGE THIS FILE IS IT NOT ENOUGH TO 'RESTART' THE UPSTART JOB
+# YOU MUST STOP IT AND THEN START IT FOR CHANGES TO THIS FILE TO BE NOTICED
+
+description "Upstart for Dropwizard Service"
+
+start on runlevel [2345]
+stop on runlevel [06]
+
+setuid {{ app_user_id }}
+
+respawn
+respawn limit 1 100
+
+
+exec java -jar /apps/{{ app_jar }} server {{ app_config_filepath }} 2>&1 | tee {{ app_log_path }}

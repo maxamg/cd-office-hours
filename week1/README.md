@@ -21,7 +21,7 @@ WEEK 1
    python --version
    Python 2.7.6
    ```
-1. Start the vagrant instanace for the Vagrantfile in this directory:
+1. Start the vagrant instance for the Vagrantfile in this directory:
 
    ```
    vagrant up
@@ -57,4 +57,10 @@ WEEK 1
     "changed": false,
     "ping": "pong"
 }
+   ```
+
+1. Destroy your vagrant VM to save space (we'll create another one in next weeks session):
+
+   ```
+   vagrant destroy -f
    ```

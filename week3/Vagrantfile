@@ -1,0 +1,47 @@
+Vagrant.require_version '>= 1.3'
+
+Vagrant.configure('2') do |config|
+  config.vm.box = 'precise64'
+  config.vm.box_url = 'http://files.vagrantup.com/precise64.box'
+
+  config.vm.provider :virtualbox do |v|
+    v.customize ['modifyvm', :id, '--memory', 1024, '--cpus', 2]
+  end
+
+  if Vagrant.has_plugin?('vagrant-cachier')
+    config.cache.auto_detect = true
+  end
+  config.vm.provider :virtualbox do |v, override|
+    if Vagrant.has_plugin?('vagrant-vbguest')
+      v.vbguest.no_remote = true
+    end
+  end
+
+  machines = {
+    'app-server'               => '192.168.33.30',
+    'go-server'                => '192.168.33.31',
+  }
+
+  machines.each do |role, ip|
+    config.vm.define role do |machine|
+      machine.vm.hostname = "#{role}.vagrant"
+      machine.vm.network :private_network, :ip => ip
+
+      if Vagrant.has_plugin?('vagrant-hosts')
+        machine.vm.provision :hosts do |provisioner|
+          machines.each do |key, value|
+            names = ["#{key}.vagrant", key]
+            provisioner.add_host value, names
+          end
+          provisioner.add_host '::1', ['ip6-localhost', 'ip6-loopback', 'localhost']
+          provisioner.add_host 'fe00::0', ['ip6-localnet']
+          provisioner.add_host 'ff00::0', ['ip6-mcastprefix']
+          provisioner.add_host 'ff02::1', ['ip6-allnodes']
+          provisioner.add_host 'ff02::2', ['ip6-allrouters']
+          provisioner.add_host 'ff02::3', ['ip6-allhosts']
+        end
+      end
+
+    end
+  end
+end

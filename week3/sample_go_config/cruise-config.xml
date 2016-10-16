@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cruise xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="cruise-config.xsd" schemaVersion="69">
+  <server artifactsdir="artifacts" commandRepositoryLocation="default" serverId="55c5c37e-d04f-4ce4-bf4e-a9dc7be06528" />
+  <pipelines group="CDOfficeHours">
+    <pipeline name="Build_HelloWorld">
+      <materials>
+        <git url="https://github.com/maxamg/dropwizard-helloworld" />
+      </materials>
+      <stage name="BuildJar">
+        <jobs>
+          <job name="PackageJar">
+            <tasks>
+              <exec command="mvn">
+                <arg>clean</arg>
+                <arg>package</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+            <artifacts>
+              <artifact src="target/dropwizard-helloworld-0.0.1-SNAPSHOT.jar" dest="hello_world" />
+              <artifact src="config/dev_config.yml" dest="hello_world" />
+            </artifacts>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+    <pipeline name="Deploy_HelloWorld">
+      <materials>
+        <git url="https://github.com/maxamg/cd-office-hours" />
+        <pipeline pipelineName="Build_HelloWorld" stageName="BuildJar" />
+      </materials>
+      <stage name="deployHelloWorldStage">
+        <jobs>
+          <job name="deployHelloWorldJob">
+            <tasks>
+              <fetchartifact pipeline="Build_HelloWorld" stage="BuildJar" job="PackageJar" srcfile="hello_world/dropwizard-helloworld-0.0.1-SNAPSHOT.jar" dest="week3/artifacts/hello_world">
+                <runif status="passed" />
+              </fetchartifact>
+              <fetchartifact pipeline="Build_HelloWorld" stage="BuildJar" job="PackageJar" srcfile="hello_world/dev_config.yml" dest="week3/artifacts/hello_world">
+                <runif status="passed" />
+              </fetchartifact>
+              <exec command="ansible-playbook" workingdir="week3">
+                <arg>-vvv</arg>
+                <arg>-i</arg>
+                <arg>./inventory</arg>
+                <arg>--user</arg>
+                <arg>vagrant</arg>
+                <arg>deploy_app_server.yml</arg>
+                <runif status="passed" />
+              </exec>
+            </tasks>
+          </job>
+        </jobs>
+      </stage>
+    </pipeline>
+  </pipelines>
+  <agents>
+    <agent hostname="go-server" ipaddress="10.0.2.15" uuid="83081310-d3f0-40e8-8e71-227da1d82b70">
+      <resources>
+        <resource>maven</resource>
+      </resources>
+    </agent>
+    <agent hostname="go-server" ipaddress="10.0.2.15" uuid="90243e1b-dd80-4aef-9b01-d6eee40b5cdd" />
+  </agents>
+</cruise>
+

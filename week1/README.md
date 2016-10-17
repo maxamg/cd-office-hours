@@ -2,10 +2,10 @@ WEEK 1
 ======
 
 1. Download vagrant:
-[https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.1.dmg](https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.1.dmg)
+[https://releases.hashicorp.com/vagrant/1.8.6/vagrant_1.8.6.dmg](https://releases.hashicorp.com/vagrant/1.8.6/vagrant_1.8.6.dmg)
 
 1. Download VirtualBox
-[http://download.virtualbox.org/virtualbox/4.3.8/VirtualBox-4.3.8-92456-OSX.dmg](http://download.virtualbox.org/virtualbox/4.3.8/VirtualBox-4.3.8-92456-OSX.dmg)
+[http://download.virtualbox.org/virtualbox/5.1.6/VirtualBox-5.1.6-110634-OSX.dmg](http://download.virtualbox.org/virtualbox/5.1.6/VirtualBox-5.1.6-110634-OSX.dmg)
 
      NB: this is specifically an older version as 4.3.10 has a bug.
 
@@ -37,8 +37,8 @@ WEEK 1
 1. Test Ansible ping
 
    ```
-   ansible -m ping AppServer -i inventory -vvv --user vagrant --private-key=~/.vagrant.d/insecure_private_key
-   ```
+  ansible -m ping AppServer -i inventory -vvv --user vagrant --private-key=.vagrant/machines/default/virtualbox/private_key 
+  ```
    Broken down those arguments are:
 
    ```
@@ -48,7 +48,7 @@ WEEK 1
    -i ./inventory     # server definition file
    -vvv               # some verbosity (a lot, actually)
    --user vagrant     # tell ansible which user
-   --private-key=~/.vagrant.d/insecure_private_key # use the vagrant SSH keys already created as part of vagrant up
+   --private-key=.vagrant/machines/default/virtualbox/private_key # use the vagrant SSH keys already created as part of vagrant up
    ```
    Response should end with:
    

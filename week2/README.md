@@ -55,9 +55,16 @@ Adjust as necessary.
 
 1. To execute the playbook:
 
+   Vagrant < 1.7
    ```
-   vagrant up
+   vagrant up --provider virtualbox
    ansible-playbook -vvv -i inventory --user vagrant --private-key=~/.vagrant.d/insecure_private_key deploy_java_app.yml
+   ```
+
+   Vagrant >= 1.7
+   ```
+   vagrant up --provider virtualbox
+   ansible-playbook -vvv -i inventory --user vagrant --private-key=.vagrant/machines/default/virtualbox/private_key deploy_java_app.yml
    ```
 
 1. Ensure you can hit the endpoint [http://192.168.33.20:8080/helloworld](http://192.168.33.20:8080/helloworld)

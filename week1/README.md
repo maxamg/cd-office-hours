@@ -28,17 +28,32 @@ WEEK 1
    ```
     This will create a new VM with Ubuntu 12.04 (precise pangolin)
 
+	If your default VM provider is set to something other than Virtualbox, you will need to explicitly specify the VM provider.
+
+	```
+	vagrant up --provider virtualbox
+	```
+
 1. Test SSH both ways
     1. ```vagrant ssh``` # then Ctrl-d to logout
     1. ```ssh vagrant@192.168.33.10``` # password is ```vagrant``` then logout
-    
-    This proves that we have set up a static IP address which Anisble will later require.
-    
-1. Test Ansible ping
+
+    This proves that we have set up a static IP address which Ansible will later require.
+
+1. Test Ansible ping (depending on the version of Vagrant you're using, the following's going to look a little different)
+
+  Prior to Vagrant 1.7, the default insecure private key is used for ssh. Test Ansible ping with:
 
    ```
-  ansible -m ping AppServer -i inventory -vvv --user vagrant --private-key=.vagrant/machines/default/virtualbox/private_key 
-  ```
+   ansible -m ping AppServer -i inventory -vvv --user vagrant --private-key=~/.vagrant.d/insecure_private_key
+   ```
+
+   Beginning in Vagrant 1.7, Vagrant replaces the default insecure key with a more secure generated one. Test Ansible ping with:
+
+   ```
+   ansible -m ping AppServer -i inventory -vvv --user vagrant --private-key=.vagrant/machines/default/virtualbox/private_key
+   ```
+
    Broken down those arguments are:
 
    ```
@@ -51,7 +66,7 @@ WEEK 1
    --private-key=.vagrant/machines/default/virtualbox/private_key # use the vagrant SSH keys already created as part of vagrant up
    ```
    Response should end with:
-   
+
    ```
    192.168.33.10 | success >> {
     "changed": false,

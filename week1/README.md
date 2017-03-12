@@ -2,12 +2,11 @@ WEEK 1
 ======
 
 1. Download vagrant:
-[https://releases.hashicorp.com/vagrant/1.8.6/vagrant_1.8.6.dmg](https://releases.hashicorp.com/vagrant/1.8.6/vagrant_1.8.6.dmg)
+[https://www.vagrantup.com/downloads.html](https://www.vagrantup.com/downloads.html)
 
 1. Download VirtualBox
 [http://download.virtualbox.org/virtualbox/5.1.6/VirtualBox-5.1.6-110634-OSX.dmg](http://download.virtualbox.org/virtualbox/5.1.6/VirtualBox-5.1.6-110634-OSX.dmg)
 
-     NB: this is specifically an older version as 4.3.10 has a bug.
 
 1. Install Ansible via brew:
 

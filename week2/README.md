@@ -46,7 +46,7 @@ Adjust as necessary.
 1. Create an Ansible play to sync the dropwizard binaries to the vagrant host and start the java process
 
 
-   See [https://github.com/maxamg/cd-office-hours/blob/master/week2/deploy_java_app.yml](https://github.com/maxamg/cd-office-hours/blob/master/week2/deploy_java_app.yml)
+   See [https://github.com/maxamg/cd-office-hours/blob/master/week2/deploy_java_app.yml](https://github.com/maxamg/cd-office-hours/blob/master/week2/deploy_java_app.yml) 
 
 1. Create a simple upstart script to daemonize the java process
 

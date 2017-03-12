@@ -1,0 +1,4 @@
+app_user_id: vagrant
+app_jar: dropwizard-helloworld-0.0.1-SNAPSHOT.jar
+app_config_filepath: /apps/dropwizard-helloworld.yml
+app_log_path: /tmp/app.log

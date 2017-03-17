@@ -51,7 +51,7 @@ Adjust as necessary.
 1. Create a simple upstart script to daemonize the java process
 
 
-   See [https://github.com/maxamg/cd-office-hours/blob/master/week2/dropwizard_upstart.j2](https://github.com/maxamg/cd-office-hours/blob/master/week2/dropwizard_upstart.j2)
+   See [https://github.com/maxamg/cd-office-hours/blob/master/week2/roles/dropwizard/templates/dropwizard_upstart.j2](https://github.com/maxamg/cd-office-hours/blob/master/week2/roles/dropwizard/templates/dropwizard_upstart.j2)
 
 1. To execute the playbook:
 
